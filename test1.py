@@ -192,7 +192,7 @@ models = []
 #models.append(('ETC',ExtraTreesClassifier(n_estimators=10)))
 #models.append(('MLP',MLPClassifier()))
 
-#from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score
 #from sklearn.svm import SVC
 
 print("proses training")
@@ -200,7 +200,7 @@ print(len(X_train))
 
 model = SVC(C=1000, gamma=0.05, kernel='linear')
 model.fit(X_train[:2],Y_train.ravel()[:2])
-prediction=model.predict(X_validation)
+prediction = model.predict(X_validation)
 accuracy = accuracy_score(Y_validation[:2], prediction)
 print(accuracy)
 
