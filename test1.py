@@ -41,11 +41,12 @@ b14 = (dset1.variables['tbb_14'][:]).ravel()
 b15 = (dset1.variables['tbb_15'][:]).ravel()
 b16 = (dset1.variables['tbb_16'][:]).ravel()
 
-cler = (dset2.variables['CLER_23'][:]).ravel()
+"""cler = (dset2.variables['CLER_23'][:]).ravel()
 clot = (dset2.variables['CLOT'][:]).ravel()
 clth = (dset2.variables['CLTH'][:]).ravel()
-cltt = (ma.getdata(dset2.variables['CLTT'][:])).ravel()
-cltype = (dset2.variables['CLTYPE'][:]).ravel()
+cltt = (ma.getdata(dset2.variables['CLTT'][:])).ravel()"""
+cltype= (ma.getdata(dset2.variables['CLTYPE'][:])).ravel()
+#cltype = (dset2.variables['CLTYPE'][:]).ravel()
 
 #datavalidasi
 file3 = 'D:/DATA SET TA/Januari TBB/29 jan/NC_H08_20220129_0150_R21_FLDK.02401_02401.nc'
@@ -66,11 +67,12 @@ b14v = (dset3.variables['tbb_14'][:]).ravel()
 b15v = (dset3.variables['tbb_15'][:]).ravel()
 b16v = (dset3.variables['tbb_16'][:]).ravel()
 
-clerv = (dset4.variables['CLER_23'][:]).ravel()
+"""clerv = (dset4.variables['CLER_23'][:]).ravel()
 clotv = (dset4.variables['CLOT'][:]).ravel()
 clthv = (dset4.variables['CLTH'][:]).ravel()
-clttv = (ma.getdata(dset4.variables['CLTT'][:])).ravel()
-cltypev = (dset4.variables['CLTYPE'][:]).ravel()
+clttv = (ma.getdata(dset4.variables['CLTT'][:])).ravel()"""
+cltypev= (ma.getdata(dset4.variables['CLTYPE'][:])).ravel()
+#cltypev = (dset4.variables['CLTYPE'][:]).ravel()
 
 # Split-out validation dataset
 from sklearn import model_selection
@@ -185,7 +187,7 @@ models = []
 #models.append(('KNN', KNeighborsClassifier()))
 #models.append(('CART', DecisionTreeClassifier()))
 #models.append(('NB', GaussianNB()))
-models.append(('SVM', SVC(C=1000, gamma=0.5, kernel='linear')))
+#models.append(('SVM', SVC(C=1000, gamma=1, kernel='linear')))
 #models.append(('RF',RandomForestClassifier(n_estimators=10)))
 #models.append(('ETC',ExtraTreesClassifier(n_estimators=10)))
 #models.append(('MLP',MLPClassifier()))
@@ -195,19 +197,19 @@ models.append(('SVM', SVC(C=1000, gamma=0.5, kernel='linear')))
 
 print("proses training")
 print(len(X_train))
-"""
+
 model = SVC(C=1000, gamma=0.05, kernel='linear')
 model.fit(X_train[:2],Y_train.ravel()[:2])
 prediction=model.predict(X_validation)
 accuracy = accuracy_score(Y_validation[:2], prediction)
-print(accuracy)"""
+print(accuracy)
 
 Y_prediction=[]
 names=[]
 for name, model in models:
-        model.fit(X_train[:1],Y_train.ravel()[:1])
+        model.fit(X_train[:2],Y_train.ravel()[:2])
         prediction=model.predict(X_validation)
-        Y_prediction.append[:1](prediction)
+        Y_prediction.append[:2](prediction)
         names.append(name)
 
 #Accuracy score
