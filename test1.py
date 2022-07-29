@@ -198,7 +198,7 @@ from sklearn.metrics import accuracy_score
 print("proses training")
 print(len(X_train))
 
-model = SVC(C=1000, gamma=0.05, kernel='linear')
+model = SVC(C=11, gamma=1, kernel='linear')
 model.fit(X_train[:2],Y_train.ravel()[:2])
 prediction = model.predict(X_validation)
 accuracy = accuracy_score(Y_validation[:2], prediction)
