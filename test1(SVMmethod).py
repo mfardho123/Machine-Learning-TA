@@ -169,6 +169,12 @@ Yv = np.array (Yv).reshape(244802,1)
 X_validation=Xv[:]
 Y_validation=Yv[:]
 
+# function to get unique values
+def unique(list2):
+    xv = np.array(list2)
+    print(np.unique(xv))
+
+unique(Y_train)
 
 # Build models
 #from sklearn.linear_model import LogisticRegression
