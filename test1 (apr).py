@@ -1,9 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue May 31 20:36:14 2022
-
-@author: Farhan
-"""
 
 # Load libraries
 import os
@@ -17,8 +11,10 @@ from netCDF4 import Dataset
 #url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
 
 #datatraining
-file1 = 'D:/DATA SET TA/Januari TBB/29 jan/NC_H08_20220129_0850_R21_FLDK.02401_02401.nc'
-file2 = 'D:/DATA SET TA/Tipe awan/januari 17-31/29/08/NC_H08_20220129_0850_L2CLP010_FLDK.02401_02401.nc'
+file1 = 'D:/DATA SET TA/Januari TBB/28 jan/NC_H08_20220128_1550_R21_FLDK.02401_02401.nc'
+file2 = 'D:/DATA SET TA/Tipe awan/januari 17-31/28/15/NC_H08_20220128_1550_L2CLP010_FLDK.02401_02401.nc'
+
+
 
 #names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 
@@ -41,15 +37,22 @@ b14 = (dset1.variables['tbb_14'][:]).ravel()
 b15 = (dset1.variables['tbb_15'][:]).ravel()
 b16 = (dset1.variables['tbb_16'][:]).ravel()
 
-cler = (dset2.variables['CLER_23'][:]).ravel()
+"""cler = (dset2.variables['CLER_23'][:]).ravel()
 clot = (dset2.variables['CLOT'][:]).ravel()
 clth = (dset2.variables['CLTH'][:]).ravel()
-cltt = (ma.getdata(dset2.variables['CLTT'][:])).ravel()
-cltype = (dset2.variables['CLTYPE'][:]).ravel()
+cltt = (ma.getdata(dset2.variables['CLTT'][:])).ravel()"""
+cltype= (ma.getdata(dset2.variables['CLTYPE'][:])).ravel()
+
+cler = ((dset2).variables['CLER_23'][:]).ravel()
+clot = ((dset2).variables['CLOT'][:]).ravel()
+clth = ((dset2).variables['CLTH'][:]).ravel()
+cltt = (ma.getdata((dset2).variables['CLTT'][:])).ravel()
+cltype = ((dset2).variables['CLTYPE'][:]).ravel()
 
 #datavalidasi
-file3 = 'D:/DATA SET TA/Januari TBB/29 jan/NC_H08_20220129_0900_R21_FLDK.02401_02401.nc'
-file4 = 'D:/DATA SET TA/Tipe awan/januari 17-31/29/09/NC_H08_20220129_0900_L2CLP010_FLDK.02401_02401.nc'
+file3 = 'D:/DATA SET TA/Januari TBB/28 jan/NC_H08_20220128_1600_R21_FLDK.02401_02401.nc'
+file4 = 'D:/DATA SET TA/Tipe awan/januari 17-31/28/16/NC_H08_20220128_1600_L2CLP010_FLDK.02401_02401.nc'
+
 
 dset3 = Dataset(file3,'r')
 dset4 = Dataset(file4,'r')
@@ -66,11 +69,11 @@ b14v = (dset3.variables['tbb_14'][:]).ravel()
 b15v = (dset3.variables['tbb_15'][:]).ravel()
 b16v = (dset3.variables['tbb_16'][:]).ravel()
 
-clerv = (dset4.variables['CLER_23'][:]).ravel()
+"""clerv = (dset4.variables['CLER_23'][:]).ravel()
 clotv = (dset4.variables['CLOT'][:]).ravel()
 clthv = (dset4.variables['CLTH'][:]).ravel()
-clttv = (ma.getdata(dset4.variables['CLTT'][:])).ravel()
-cltypev = (dset4.variables['CLTYPE'][:]).ravel()
+clttv = (ma.getdata(dset4.variables['CLTT'][:])).ravel()"""
+cltypev= (ma.getdata(dset4.variables['CLTYPE'][:])).ravel()
 
 # Split-out validation dataset
 from sklearn import model_selection
@@ -114,14 +117,11 @@ Y = np.array (Y).reshape(5764801,1)
 X_train=X[:]
 Y_train=Y[:]
 
+
 Xv = []
 for i in range(len(b07)):
     Xv.append([b07v[i],b11v[i],b13v[i]])
-
-from tqdm import tqdm
-
 Yv = []
-#for i in range(len(cltypev)):
 for i in tqdm(range(5764801)):
     if cltypev[i] >= 0 and cltypev[i] < 1:
         Yv.append(1)
@@ -155,23 +155,23 @@ Y_validation=Yv[:]
 
 # Build models
 from sklearn.linear_model import LogisticRegression
-#from sklearn.tree import DecisionTreeClassifier
-#from sklearn.neighbors import KNeighborsClassifier
-#from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
-#from sklearn.naive_bayes import GaussianNB
-#from sklearn.svm import SVR
-#from sklearn.ensemble import RandomForestClassifier
-#from sklearn.ensemble import ExtraTreesClassifier
-#from sklearn.neural_network import MLPClassifier
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVR
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.neural_network import MLPClassifier
 
 models = []
-models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
+#models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
 #models.append(('LDA', LinearDiscriminantAnalysis()))
 #models.append(('KNN', KNeighborsClassifier()))
 #models.append(('CART', DecisionTreeClassifier()))
 #models.append(('NB', GaussianNB()))
 #models.append(('SVM', SVR(gamma='auto')))
-#models.append(('RF',RandomForestClassifier(n_estimators=10)))
+models.append(('RF',RandomForestClassifier(n_estimators=10)))
 #models.append(('ETC',ExtraTreesClassifier(n_estimators=10)))
 #models.append(('MLP',MLPClassifier()))
 
@@ -221,7 +221,7 @@ xv,yv=pylab.meshgrid(lons,lats)
 lon,lat = m(xv,yv)
 
 # plot data
-clev = pylab.arange(0,11,1) 
+clev = pylab.arange(0,10,1) 
 
 label = ['Ci','Cs','DC','Ac','As','Ns','Cu','Sc','St']
 cs = m.contourf(lon,lat,yp,levels=clev)
