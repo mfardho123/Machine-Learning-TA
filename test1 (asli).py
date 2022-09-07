@@ -17,8 +17,8 @@ from netCDF4 import Dataset
 #url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
 
 #datatraining
-file1 = 'D:/DATA SET TA/april/15 april/NC_H08_20220415_0140_R21_FLDK.02401_02401.nc'
-file2 = 'D:/DATA SET TA/Tipe awan/april 15/15/NC_H08_20220415_0140_L2CLP010_FLDK.02401_02401.nc'
+file1 = 'D:/DATA SET TA/Januari TBB/29 jan/NC_H08_20220129_1350_R21_FLDK.02401_02401.nc'
+file2 = 'D:/DATA SET TA/Tipe awan/januari 17-31/29/13/NC_H08_20220129_1350_L2CLP010_FLDK.02401_02401.nc'
 
 #names = ['sepal-length', 'sepal-width', 'petal-length', 'petal-width', 'class']
 
@@ -48,8 +48,8 @@ cltt = (ma.getdata(dset2.variables['CLTT'][:])).ravel()
 cltype = (dset2.variables['CLTYPE'][:]).ravel()
 
 #datavalidasi
-file3 = 'D:/DATA SET TA/april/15 april/NC_H08_20220415_0150_R21_FLDK.02401_02401.nc'
-file4 = 'D:/DATA SET TA/Tipe awan/april 15/15/NC_H08_20220415_0150_L2CLP010_FLDK.02401_02401.nc'
+file3 = 'D:/DATA SET TA/Januari TBB/29 jan/NC_H08_20220129_1400_R21_FLDK.02401_02401.nc'
+file4 = 'D:/DATA SET TA/Tipe awan/januari 17-31/29/14/NC_H08_20220129_1400_L2CLP010_FLDK.02401_02401.nc'
 
 dset3 = Dataset(file3,'r')
 dset4 = Dataset(file4,'r')
